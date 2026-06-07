@@ -1,6 +1,6 @@
-describe('OrangeHRM Comprehensive Test', () => {
+describe('OrangeHRM Login and Dashboard Feature Test', () => {
 
-  it('Automated Testing Website OrangeHRM', () => {
+  it('Automated Testing Login and Dashboard OrangeHRM', () => {
 
     // Halaman Login
 
