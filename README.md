@@ -31,3 +31,24 @@ Skrip pengujian di dalam file `cypress/e2e/login_orangehrm.cy.js` mencakup 10 sk
 10. **Test 10:** Login Gagal Menggunakan *Case Sensitive* pada Password.
 
 ---
+
+## Penjelasan Tambahan: `cypress/e2e/spec.cy.js`
+
+Selain pengujian terfragmentasi pada fitur login (`login_orangehrm.cy.js`), repositori ini juga memiliki berkas **`spec.cy.js`**. Berkas ini berfungsi sebagai **Alur Pengujian Dasar End-to-End (E2E)** yang menguji integrasi penuh mulai dari proses autentikasi hingga interaksi komponen utama di dalam halaman Dashboard dalam satu siklus pengujian tunggal.
+
+### Alur Kerja & Validasi yang Dilakukan (`spec.cy.js`):
+
+#### 1. Fase Otentikasi (Halaman Login)
+* **Akses URL:** Membuka halaman utama sistem OrangeHRM.
+* **Validasi Visual Awal:** Memastikan komponen branding (`img[alt="company-branding"]`) eksis dan judul form `Login` terlihat di layar.
+* **Interaksi Form:** Mengetikkan data kredensial valid (`Admin` / `admin123`).
+* **Validasi Atribut Keamanan:** Memastikan input pada kolom *username* sesuai dan atribut kolom *password* berupa `type="password"`.
+* **Eksekusi:** Memastikan tombol login dalam kondisi aktif (*enabled*) sebelum diklik oleh sistem.
+
+#### 2. Fase Eksplorasi (Halaman Dashboard)
+Setelah proses login berhasil dilewati, skrip langsung melanjutkan pengujian ke area internal sistem:
+* **Validasi URL & Header:** Memastikan URL beralih ke `/dashboard` dan judul bar atas bertuliskan `Dashboard`.
+* **Validasi Sidebar Menu:** Memeriksa integritas menu navigasi samping untuk memastikan jumlahnya tepat berjumlah 12 item menu.
+* **Fitur Pencarian:** Menguji fungsionalitas kolom pencarian menu dengan mengetikkan kata kunci lalu menghapusnya kembali (`.clear()`).
+* **Interaksi Halaman:** Melakukan simulasi gulir (*scrolling*) ke bawah halaman untuk memverifikasi teks hak cipta (*copyright*), lalu kembali bergulir ke posisi paling atas (*top*).
+* **Menu Profil Pengguna:** Mengklik menu *drop-down* akun, memicu efek *hover* (*mouseover*), dan memvalidasi bahwa tautan navigasi internal di dalamnya (seperti opsi Logout) telah berhasil muncul secara visual.
